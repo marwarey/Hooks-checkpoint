@@ -4,7 +4,9 @@ import{ moviedata } from './Components/MoviesData'
 import MoviesList from './Components/MoviesList';
 import Navigation from './NavBar/Navigation';
 import AddMovies from './Components/AddMovies';
-
+import Home from './Components/Home';
+import { Route } from "react-router-dom";
+import Details from './Components/Details';
 
 const App = () => {
  
@@ -17,11 +19,13 @@ const App = () => {
   console.log(rate)
   return (
     <div className="App">
-      <Navigation title={title} setTitle={setTitle} rate={rate} setRate={setRate}/>
+      <Navigation title={title} setTitle={setTitle} rate={rate} setRate={setRate}    />
       <AddMovies handleAdd={handleAdd}  />
-     
-     <MoviesList movies={movies} title={title} rate={rate}/>    
-     </div>
+      <Route exact path='/movies'  render={()=><MoviesList movies={movies} title={title} rate={rate}></MoviesList>}/>    
+      <Route exact path='/' component={Home} />
+      <Route  exact  path='/details/:id'       render={(props)=> <Details {...props}  movies={movies}   ></Details> }    ></Route>
+
+   </div>
   );
 }
 
